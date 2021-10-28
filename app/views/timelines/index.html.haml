@@ -1,0 +1,12 @@
+%h1
+  タイムライン
+%div
+  = form_for @timeline, url: timelines_path do |f|
+    = f.label :content, '投稿内容(最大140字)'
+    = f.text_field :content, class: 'form-control'
+    = f.submit '送信', class: 'btn btn-primary'
+%div
+  - @timelines.each do |timeline|
+    %p
+      = timeline.content
+      = timeline.created_at.to_s(:datetime_jp)
