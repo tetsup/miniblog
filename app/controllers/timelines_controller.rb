@@ -5,7 +5,9 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    Timeline.create(timeline_params)
+    if !current_user.nil?
+      Timeline.create(timeline_params)
+    end
     redirect_to '/'
   end
 
