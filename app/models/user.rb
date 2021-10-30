@@ -10,4 +10,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
   validates :profile, length: { maximum: 200 }
+  has_many :timelines, dependent: :destroy
 end

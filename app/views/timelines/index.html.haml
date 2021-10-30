@@ -9,5 +9,7 @@
 %div
   - @timelines.each do |timeline|
     %p
-      = timeline.content
+      = timeline.username
       = timeline.created_at.to_s(:datetime_jp)
+    %p
+      = timeline.content

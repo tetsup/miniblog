@@ -1,12 +1,14 @@
 class TimelinesController < ApplicationController
   def index
-    @timelines = Timeline.all.reverse_order
+    @timelines = Timeline.joins(:user).select("timelines.*, users.username").all.order(id: "DESC")
     @timeline = Timeline.new
   end
 
   def create
     if !current_user.nil?
-      Timeline.create(timeline_params)
+      @timeline = Timeline.new(timeline_params)
+      @timeline.user_id = current_user.id
+      @timeline.save
     end
     redirect_to '/'
   end
