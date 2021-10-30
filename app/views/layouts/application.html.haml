@@ -9,19 +9,30 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
-    %header
-      %nav
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      = link_to 'MiniBlog', root_path, class: 'navbar-brand'
+      %button.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#navbarNav' }, aria: { controls: 'navbarNav', expanded: 'false', label: 'Toggle navigation' } }
+        %span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
         - if user_signed_in?
-          %strong
-            = current_user.username
-          = link_to 'プロフィール変更', edit_user_registration_path
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete
+          %span.navbar-text
+            = "#{current_user.username}でログイン中"
+          %ul.navbar-nav
+            %li.nav-item
+              = link_to 'プロフィール変更', edit_user_registration_path, class: 'nav-link'
+            %li.nav-item
+              = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
         - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
+          %ul.navbar-nav
+            %li.nav-item
+              = link_to 'サインアップ', new_user_registration_path, class: 'nav-link'
+            %li.nav-item
+              = link_to 'ログイン', new_user_session_path, class: 'nav-link'
 
-    %p.notice
-      = notice
-    %p.alert
-      = alert
+    - if notice.present?
+      %div.alert.alert-info
+        = notice
+    - if alert.present?
+      %div.alert.alert-warning
+        = alert
     = yield
