@@ -11,4 +11,12 @@ class User < ApplicationRecord
          :rememberable, :validatable
   validates :profile, length: { maximum: 200 }
   has_many :timelines, dependent: :destroy
+  has_many :followed, class_name: 'Follow', foreign_key: :followed_user_id, dependent: :destroy
+  has_many :followers, through: :followed, source: :follower
+  has_many :following, class_name: 'Follow', foreign_key: :follower_id
+  has_many :following_users, through: :following, source: :followed_user
+
+  def followed_by?(user)
+    followed.find_by(follower_id: user.id).present?
+  end
 end

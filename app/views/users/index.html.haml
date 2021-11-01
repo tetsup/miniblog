@@ -1,0 +1,10 @@
+%h2
+  User Information
+%div
+  %table
+    - for user in @users
+      %tr
+        %td
+          = user.id
+        %td
+          = user.username
