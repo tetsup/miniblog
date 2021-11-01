@@ -1,6 +1,13 @@
 %h1
   タイムライン
 %div
+  - if params[:query] == 'following'
+    = link_to '全体', root_path
+    フォローした人のみ
+  - else
+    全体
+    = link_to 'フォローした人のみ', root_path(query: 'following')
+%div
   - if !current_user.nil?
     = form_for @timeline, url: timelines_path do |f|
       = f.label :content, '投稿内容(最大140字)'
