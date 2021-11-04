@@ -10,7 +10,7 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    if !current_user.nil?
+    if user_signed_in?
       @timeline = Timeline.new(timeline_params)
       @timeline.user_id = current_user.id
       @timeline.save

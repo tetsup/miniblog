@@ -1,6 +1,6 @@
 %h1
   タイムライン
-- if !current_user.nil?
+- if user_signed_in?
   %div
     - if params[:query] == 'following'
       = link_to '全体', root_path

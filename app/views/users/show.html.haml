@@ -2,7 +2,7 @@
   User Page
 %div
   %p
-    - if current_user.nil?
+    - if !user_signed_in?
       ログインしていません
     - elsif current_user.id == @user.id
       あなたの情報ページです
