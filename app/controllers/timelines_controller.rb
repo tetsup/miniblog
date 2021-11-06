@@ -1,4 +1,6 @@
 class TimelinesController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
     if params[:query] == 'following'
       @followings = current_user.following_users
@@ -10,12 +12,8 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    if user_signed_in?
-      @timeline = Timeline.new(timeline_params)
-      @timeline.user_id = current_user.id
-      @timeline.save
-    end
-    redirect_to '/'
+    current_user.timelines.build(timeline_params).save!
+    redirect_to timelines_path
   end
 
   private
