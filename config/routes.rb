@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root 'timelines#index'
-  post 'timelines', to: 'timelines#create'
+  resources :timelines, only: [:index, :create]
   resources :users, only: [:show] do
     resource :follows, only: [:create, :destroy]
   end
