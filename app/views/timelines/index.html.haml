@@ -16,7 +16,7 @@
 %div
   - @timelines.each do |timeline|
     %p
-      = link_to timeline.username, user_path(timeline.user_id)
+      = link_to timeline.user.username, user_path(timeline.user_id)
       = timeline.created_at.to_s(:datetime_jp)
     %p
       = timeline.content
