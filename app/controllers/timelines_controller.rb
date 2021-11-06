@@ -3,8 +3,8 @@ class TimelinesController < ApplicationController
 
   def index
     if params[:query] == 'following'
-      @followings = current_user.following_users
-      @timelines = Timeline.where(user_id: @followings).or(Timeline.where(user_id: current_user.id)).eager_load(:user).order(id: "DESC")
+      user_filter = [current_user] + [*current_user.following_users]
+      @timelines = Timeline.where(user: user_filter).eager_load(:user).order(id: "DESC")
     else
       @timelines = Timeline.eager_load(:user).order(id: "DESC")
     end
