@@ -4,16 +4,16 @@
   %p
     - if !user_signed_in?
       ログインしていません
-    - elsif current_user.id == @user.id
+    - elsif current_user == @user
       あなたの情報ページです
     - elsif @user.followed_by?(current_user)
-      = form_for(@follow, url: follows_path, method: :delete) do |f|
+      = form_for(@follow, url: user_follows_path(@user), method: :delete) do |f|
         .form-group
           フォロー中
           = f.hidden_field :followed_user_id
           = f.submit 'フォロー解除', class: 'btn btn-danger'
     - else
-      = form_for(@follow, url: follows_path, method: :post) do |f|
+      = form_for(@follow, url: user_follows_path(@user), method: :post) do |f|
         .form-group
           未フォロー
           = f.hidden_field :followed_user_id

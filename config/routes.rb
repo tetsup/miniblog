@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   root 'timelines#index'
   post 'timelines', to: 'timelines#create'
-  resources :users, only: [:show, :index]
-  resources :follows, only: [:create]
-  delete 'follows', to: 'follows#destroy'
+  resources :users, only: [:show] do
+    resource :follows, only: [:create, :destroy]
+  end
 end
