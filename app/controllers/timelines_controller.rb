@@ -13,7 +13,7 @@ class TimelinesController < ApplicationController
 
   def create
     current_user.timelines.build(timeline_params).save!
-    redirect_to timelines_path
+    redirect_to request.referrer
   end
 
   private
