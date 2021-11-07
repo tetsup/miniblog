@@ -2,7 +2,7 @@ class FollowsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    current_user.followings.build(follow_params).save!
+    current_user.followings.create!(follow_params)
     redirect_to_user_page
   end
 

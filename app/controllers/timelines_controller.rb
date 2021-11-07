@@ -11,7 +11,7 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    current_user.timelines.build(timeline_params).save!
+    current_user.timelines.create!(timeline_params)
     redirect_to request.referrer
   end
 
