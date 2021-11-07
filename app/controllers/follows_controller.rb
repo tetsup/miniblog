@@ -2,14 +2,12 @@ class FollowsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @follow = current_user.followings.build(follow_params)
-    @follow.save!
+    current_user.followings.build(follow_params).save!
     redirect_to_user_page
   end
 
   def destroy
-    @follow = current_user.followings.find_by_followed_user_id(follow_params[:followed_user_id])
-    @follow.destroy!
+    current_user.followings.find_by_followed_user_id(follow_params[:followed_user_id]).destroy!
     redirect_to_user_page
   end
 
