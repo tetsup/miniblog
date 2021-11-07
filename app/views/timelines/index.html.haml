@@ -9,9 +9,8 @@
       全体
       = link_to 'フォローした人のみ', timelines_path(query: 'following')
   %div
-    = form_for @timeline, url: timelines_path do |f|
-      = f.label :content, '投稿内容(最大140字)'
-      = f.text_field :content, class: 'form-control'
+    = simple_form_for @timeline do |f|
+      = f.input_field :content, label: '投稿内容(最大140字)', class: 'form-control'
       = f.submit '送信', class: 'btn btn-primary'
 %div
   - @timelines.each do |timeline|
