@@ -1,21 +1,18 @@
 class TimelinesController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
     if params[:query] == 'following'
-      @followings = current_user.following_users
-      @timelines = Timeline.where(user_id: @followings).or(Timeline.where(user_id: current_user.id)).joins(:user).select("timelines.*, users.username").all.order(id: "DESC")
+      @timelines = Timeline.following(current_user).eager_load(:user).sorted
     else
-      @timelines = Timeline.joins(:user).select("timelines.*, users.username").all.order(id: "DESC")
+      @timelines = Timeline.eager_load(:user).sorted
     end
     @timeline = Timeline.new
   end
 
   def create
-    if !current_user.nil?
-      @timeline = Timeline.new(timeline_params)
-      @timeline.user_id = current_user.id
-      @timeline.save
-    end
-    redirect_to '/'
+    current_user.timelines.create!(timeline_params)
+    redirect_to request.referrer
   end
 
   private

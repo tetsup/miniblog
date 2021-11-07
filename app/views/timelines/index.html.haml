@@ -1,22 +1,21 @@
 %h1
   タイムライン
-- if !current_user.nil?
+- if user_signed_in?
   %div
     - if params[:query] == 'following'
-      = link_to '全体', root_path
+      = link_to '全体', timelines_path
       フォローした人のみ
     - else
       全体
-      = link_to 'フォローした人のみ', root_path(query: 'following')
+      = link_to 'フォローした人のみ', timelines_path(query: 'following')
   %div
-    = form_for @timeline, url: timelines_path do |f|
-      = f.label :content, '投稿内容(最大140字)'
-      = f.text_field :content, class: 'form-control'
+    = simple_form_for @timeline do |f|
+      = f.input_field :content, label: '投稿内容(最大140字)', class: 'form-control'
       = f.submit '送信', class: 'btn btn-primary'
 %div
   - @timelines.each do |timeline|
     %p
-      = link_to timeline.username, user_path(timeline.user_id)
+      = link_to timeline.user.username, user_path(timeline.user_id)
       = timeline.created_at.to_s(:datetime_jp)
     %p
       = timeline.content
