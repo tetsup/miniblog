@@ -1,13 +1,13 @@
 class TimelinesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:following, :create]
+  before_action :set_new_timeline, only: [:index, :following]
 
   def index
-    if params[:query] == 'following'
-      @timelines = Timeline.following(current_user).eager_load(:user).sorted
-    else
-      @timelines = Timeline.eager_load(:user).sorted
-    end
-    @timeline = Timeline.new
+    @timelines = Timeline.eager_load(:user).sorted
+  end
+
+  def following
+    @timelines = Timeline.following(current_user).eager_load(:user).sorted
   end
 
   def create
@@ -19,5 +19,9 @@ class TimelinesController < ApplicationController
 
   def timeline_params
     params.require(:timeline).permit(:content)
+  end
+
+  def set_new_timeline
+    @timeline = Timeline.new
   end
 end
