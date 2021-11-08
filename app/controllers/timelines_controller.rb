@@ -3,8 +3,7 @@ class TimelinesController < ApplicationController
   before_action :set_new_timeline, only: [:index, :following]
 
   def index
-    @timelines = Timeline.eager_load(:user).sorted
-    @my_favorites = current_user.favorites.pluck(:timeline_id)
+    @timelines = Timeline.eager_load(:user).users_favorite(current_user).sorted
   end
 
   def following

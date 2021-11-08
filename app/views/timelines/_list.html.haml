@@ -4,7 +4,7 @@
       = link_to timeline.user.username, user_path(timeline.user_id)
       = timeline.created_at.to_s(:datetime_jp)
       - if user_signed_in?
-        - if @my_favorites.include?(timeline.id)
+        - if timeline.favorites.present?
           = link_to 'いいね！を取り消す', timeline_favorites_path(timeline), method: :delete
         - else
           = link_to 'いいね！する', timeline_favorites_path(timeline), method: :post
