@@ -4,6 +4,7 @@ class TimelinesController < ApplicationController
 
   def index
     @timelines = Timeline.eager_load(:user).sorted
+    @my_favorites = current_user.favorites.pluck(:timeline_id)
   end
 
   def following

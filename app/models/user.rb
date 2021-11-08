@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :followedes, class_name: 'Follow', foreign_key: :followed_user_id, dependent: :destroy
   has_many :followings, class_name: 'Follow', foreign_key: :follower_id
   has_many :following_users, through: :followings, source: :followed_user
+  has_many :favorites, dependent: :destroy
 
   def followed_by?(user)
     followedes.find_by(follower_id: user.id).present?
