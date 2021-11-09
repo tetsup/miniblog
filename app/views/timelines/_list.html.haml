@@ -4,7 +4,8 @@
       = link_to timeline.user.username, user_path(timeline.user_id)
       = timeline.created_at.to_s(:datetime_jp)
       %i.far.fa-thumbs-up
-      = value_or_zero(@favorites_count[timeline.id])
+      = link_to timeline_favorites_path(timeline), remote: true do
+        = value_or_zero(@favorites_count[timeline.id])
       - if user_signed_in?
         - if @my_favorites.include?(timeline.id)
           = link_to 'いいね！を取り消す', timeline_favorites_path(timeline), method: :delete

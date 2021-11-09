@@ -1,5 +1,9 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
+
+  def index
+    @favorite_users = Timeline.find(favorite_params[:timeline_id]).favorite_users
+  end
 
   def create
     current_user.favorites.create!(favorite_params)
