@@ -3,11 +3,11 @@ class TimelinesController < ApplicationController
   before_action :set_new_timeline, only: [:index, :following]
 
   def index
-    @timelines = Timeline.eager_load(:user).sorted
+    set_datas(Timeline)
   end
 
   def following
-    @timelines = Timeline.following(current_user).eager_load(:user).sorted
+    set_datas(Timeline.following(current_user))
   end
 
   def create
@@ -23,5 +23,9 @@ class TimelinesController < ApplicationController
 
   def set_new_timeline
     @timeline = Timeline.new
+  end
+
+  def set_datas(timelines)
+    @timelines = timelines.eager_load(:user).preload(:favorite_users).sorted
   end
 end
