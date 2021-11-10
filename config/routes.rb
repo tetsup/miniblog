@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root 'timelines#index'
-  resources :timelines, only: [:index, :create] do
+  resources :timelines, only: [:index, :show, :create] do
     resource :favorites, only: [:create, :destroy]
     resources :favorites, only: [:index]
+    resources :comments, only: [:create]
     collection do
       get 'following'
     end

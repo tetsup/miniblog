@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_021230) do
+ActiveRecord::Schema.define(version: 2021_11_10_121222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "timeline_id"
+    t.bigint "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["timeline_id"], name: "index_comments_on_timeline_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
@@ -55,6 +65,8 @@ ActiveRecord::Schema.define(version: 2021_11_01_021230) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "comments", "timelines"
+  add_foreign_key "comments", "users"
   add_foreign_key "favorites", "timelines"
   add_foreign_key "favorites", "users"
   add_foreign_key "follows", "users", column: "followed_user_id"
