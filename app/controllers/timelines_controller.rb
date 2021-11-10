@@ -26,8 +26,6 @@ class TimelinesController < ApplicationController
   end
 
   def set_datas(timelines)
-    @timelines = timelines.eager_load(:user).sorted
-    @my_favorites = current_user.favorites.pluck(:timeline_id)
-    @favorites_count = timelines.favorites_count
+    @timelines = timelines.eager_load(:user).preload(:favorite_users).sorted
   end
 end
