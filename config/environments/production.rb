@@ -64,6 +64,16 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "app_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV['MINIBLOG_SMTP_ADDR'],
+    port: ENV['MINIBLOG_SMTP_PORT'] || 587,
+    domain: ENV['MINIBLOG_SMTP_DOMAIN'],
+    user_name: ENV['MINIBLOG_SMTP_USERNAME'],
+    password: ENV['MINIBLOG_SMTP_PASSWORD'],
+    authentication: ENV['MINIBLOG_SMTP_AUTHTYPE'] || 'plain',
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

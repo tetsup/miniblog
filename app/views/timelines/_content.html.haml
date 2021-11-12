@@ -1,0 +1,16 @@
+%p
+  = link_to timeline.user.username, user_path(timeline.user_id)
+  = timeline.created_at.to_s(:datetime_jp)
+  %i.far.fa-comment
+  = link_to timeline_path(timeline) do
+    = timeline.comments.size
+  %i.far.fa-thumbs-up
+  = link_to timeline_favorites_path(timeline), remote: true do
+    = timeline.favorite_users.size
+  - if user_signed_in?
+    - if timeline.favorite_users.include?(current_user)
+      = link_to 'いいね！を取り消す', timeline_favorites_path(timeline), method: :delete
+    - else
+      = link_to 'いいね！する', timeline_favorites_path(timeline), method: :post
+%p
+  = timeline.content

@@ -18,8 +18,4 @@ test:
   host: db
 
 production:
-  <<: *default
-  database: <%= ENV['MINIBLOG_DB_DATABASE'] %>
-  username: <%= ENV['MINIBLOG_DB_USERNAME'] %>
-  password: <%= ENV['MINIBLOG_DB_PASSWORD'] %>
-  host: <%= ENV['MINIBLOG_DB_HOST'] %>
+  url: <%= ENV['DATABASE_URL'] %>

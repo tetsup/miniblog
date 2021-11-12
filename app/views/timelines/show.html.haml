@@ -1,0 +1,16 @@
+%h2
+  個別投稿ページ
+= render 'content', timeline: @timeline
+%hr
+%h4
+  この投稿へのコメント
+- if user_signed_in?
+  = simple_form_for @comment, url: timeline_comments_path(@timeline.id) do |f|
+    = f.input_field :content, label: 'コメント(最大140字)', class: 'form-control'
+    = f.submit '送信', class: 'btn btn-primary'
+- @timeline.comments.each do |comment|
+  %p
+    = link_to comment.user.username, user_path(comment.user_id)
+    = comment.created_at.to_s(:datetime_jp)
+  %p
+    = comment.content

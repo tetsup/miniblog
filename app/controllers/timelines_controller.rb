@@ -10,6 +10,11 @@ class TimelinesController < ApplicationController
     set_datas(Timeline.following(current_user))
   end
 
+  def show
+    @comment = Comment.new
+    @timeline = Timeline.where(id: params[:id]).eager_load(:user).eager_load(:comments).preload(:comments_user).first
+  end
+
   def create
     current_user.timelines.create!(timeline_params)
     redirect_to request.referrer
@@ -26,6 +31,6 @@ class TimelinesController < ApplicationController
   end
 
   def set_datas(timelines)
-    @timelines = timelines.eager_load(:user).preload(:favorite_users).sorted
+    @timelines = timelines.eager_load(:user).eager_load(:comments).preload(:favorite_users).sorted
   end
 end
