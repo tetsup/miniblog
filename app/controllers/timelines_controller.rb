@@ -23,7 +23,7 @@ class TimelinesController < ApplicationController
   private
 
   def timeline_params
-    params.require(:timeline).permit(:content)
+    params.require(:timeline).permit(:content, :attached_image_path)
   end
 
   def set_new_timeline
