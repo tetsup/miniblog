@@ -1,0 +1,6 @@
+production:
+  cloud_name: ENV['MINIBLOG_CLOUDINARY_CLOUD_NAME']
+  api_key: ENV['MINIBLOG_CLOUDINARY_API_KEY']
+  api_secret: ENV['MINIBLOG_CLOUDINARY_API_SECRET']
+  enhance_image_tag: true
+  static_image_support: true

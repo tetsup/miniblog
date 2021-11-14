@@ -14,3 +14,6 @@
       = link_to 'いいね！する', timeline_favorites_path(timeline), method: :post
 %p
   = timeline.content
+- if timeline.attached_image_path.present?
+  %p
+  = image_tag timeline.attached_image_path_url(:thumb)
