@@ -18,7 +18,6 @@ gem 'haml-rails', '~> 2.0'
 gem 'devise', '~> 4.8.0'
 gem 'simple_form', '~> 5.1.0'
 gem 'carrierwave', '~> 2.0'
-gem 'rmagick', '~> 4.2'
 gem 'cloudinary', '~> 1.21.0'
 
 group :development, :test do

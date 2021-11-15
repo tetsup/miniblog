@@ -1,14 +1,5 @@
 class AttachedImageUploader < CarrierWave::Uploader::Base
-  if Rails.env.production?
-    include Cloudinary::CarrierWave
-  else
-    include CarrierWave::RMagick
-    storage :file
-  end
-
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  include Cloudinary::CarrierWave
 
   def extension_whitelist
     ['jpg', 'jpeg', 'gif', 'png']
