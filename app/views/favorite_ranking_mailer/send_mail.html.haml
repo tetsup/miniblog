@@ -1,0 +1,6 @@
+- @ranking.each do |timeline|
+  %p
+    = timeline.user.username
+    = "いいね: #{timeline.favorite_users.size}"
+  %p
+    = timeline.content
