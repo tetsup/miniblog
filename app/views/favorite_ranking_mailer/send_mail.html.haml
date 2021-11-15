@@ -1,0 +1,11 @@
+%h2
+  miniblog 昨日のいいねランキング
+- @ranking.each.with_index(1) do |timeline, i|
+  %hr
+  %h4
+    = "第#{i}位: #{timeline.favorite_users.size}いいね"
+  %p
+    投稿者:
+    = timeline.user.username
+  %p
+    = timeline.content

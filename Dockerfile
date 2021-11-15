@@ -1,5 +1,5 @@
 FROM ruby:2.7.4
-RUN apt-get update -qq && apt-get install -y build-essential nodejs imagemagick libmagick++-dev
+RUN apt-get update -qq && apt-get install -y build-essential nodejs
 RUN mkdir /app
 WORKDIR /app
 COPY Gemfile /app/Gemfile
