@@ -13,12 +13,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.0.0'
-gem 'jquery-rails', '~> 4.4.0'
-gem 'haml-rails', '~> 2.0'
-gem 'devise', '~> 4.8.0'
-gem 'simple_form', '~> 5.1.0'
-gem 'carrierwave', '~> 2.0'
-gem 'cloudinary', '~> 1.21.0'
+gem 'jquery-rails'
+gem 'haml-rails'
+gem 'devise'
+gem 'simple_form'
+gem 'carrierwave'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
