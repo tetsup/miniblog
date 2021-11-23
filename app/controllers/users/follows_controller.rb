@@ -1,4 +1,4 @@
-class FollowsController < ApplicationController
+class Users::FollowsController < ApplicationController
   before_action :authenticate_user!
 
   def create
