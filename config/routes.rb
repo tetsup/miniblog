@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   }
   root 'timelines#index'
   resources :timelines, only: [:index, :show, :create] do
-    resource :favorites, only: [:create, :destroy]
-    resources :favorites, only: [:index]
-    resources :comments, only: [:create]
+    resource :favorites, only: [:create, :destroy], module: :timelines
+    resources :favorites, only: [:index], module: :timelines
+    resources :comments, only: [:create], module: :timelines
     collection do
       get 'following'
     end
   end
   resources :users, only: [:show] do
-    resource :follows, only: [:create, :destroy]
+    resource :follows, only: [:create, :destroy], module: :users
   end
 end
