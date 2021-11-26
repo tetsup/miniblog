@@ -16,5 +16,4 @@ class Users::FollowsController < ApplicationController
   def redirect_to_user_page
     redirect_to user_path(params[:user_id])
   end
-
 end
