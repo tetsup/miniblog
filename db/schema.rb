@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_121341) do
+ActiveRecord::Schema.define(version: 2021_11_26_152104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "timeline_id"
-    t.bigint "user_id"
+    t.bigint "timeline_id", null: false
+    t.bigint "user_id", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_11_12_121341) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "timeline_id"
+    t.bigint "user_id", null: false
+    t.bigint "timeline_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["timeline_id"], name: "index_favorites_on_timeline_id"
