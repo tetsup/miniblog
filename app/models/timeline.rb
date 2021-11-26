@@ -8,7 +8,7 @@ class Timeline < ApplicationRecord
   belongs_to :user
 
   scope :following, -> (user){ where(user: [user] + user.following_users) }
-  scope :sorted, -> { order(created_at: :desc) }
+  scope :sorted, -> { order(id: :desc) }
   scope :favorites_rank, -> (num, date){
     find(
       Favorite.filter_by_date(date).
