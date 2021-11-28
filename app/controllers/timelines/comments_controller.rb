@@ -5,9 +5,9 @@ class Timelines::CommentsController < ApplicationController
     comment = Timeline.find(params[:timeline_id]).comments.build(comment_params.merge(user: current_user))
     if comment.save
       UserMailer.comment(comment).deliver_later
-      redirect_to request.referrer, notice: 'コメント完了しました'
+      redirect_back fallback_location: timelines_path, notice: 'コメント完了しました'
     else
-      redirect_to request.referrer, alert: comment.errors.full_messages.join(', ')
+      redirect_back fallback_location: timelines_path, alert: comment.errors.full_messages.join(', ')
     end
   end
 
