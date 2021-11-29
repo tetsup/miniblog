@@ -7,12 +7,12 @@ class Timelines::FavoritesController < ApplicationController
 
   def create
     current_user.favorites.create!(favorite_params)
-    redirect_to request.referrer
+    redirect_back fallback_location: timelines_path
   end
 
   def destroy
     current_user.favorites.find_by_timeline_id(favorite_params[:timeline_id]).destroy!
-    redirect_to request.referrer
+    redirect_back fallback_location: timelines_path
   end
 
   def favorite_params

@@ -2,12 +2,12 @@ class Timelines::CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    comment = Timeline.find(params[:timeline_id]).comments.build(comment_params.merge(user: current_user))
+    comment = current_user.comments.build(comment_params.merge(timeline_id: params[:timeline_id]))
     if comment.save
-      CommentMailer.send_mail(comment).deliver_later
-      redirect_to request.referrer, notice: 'コメント完了しました'
+      UserMailer.comment(comment).deliver_later
+      redirect_back fallback_location: timelines_path, notice: 'コメント完了しました'
     else
-      redirect_to request.referrer, alert: comment.errors.full_messages.join(', ')
+      redirect_back fallback_location: timelines_path, alert: comment.errors.full_messages.join(', ')
     end
   end
 

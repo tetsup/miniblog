@@ -1,5 +1,5 @@
-class CommentMailer < ApplicationMailer
-  def send_mail(comment)
+class UserMailer < ApplicationMailer
+  def comment(comment)
     @comment = comment
     mail(
       to: @comment.timeline.user.email,

@@ -30,6 +30,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'pry-byebug'
+  gem 'sgcop', github: 'SonicGarden/sgcop'
 end
 
 group :test do
