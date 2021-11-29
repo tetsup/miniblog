@@ -16,8 +16,12 @@ class TimelinesController < ApplicationController
   end
 
   def create
-    current_user.timelines.create!(timeline_params)
-    redirect_to request.referrer
+    timeline = current_user.timelines.build(timeline_params)
+    if timeline.save
+      redirect_to request.referrer, notice: '投稿完了しました'
+    else
+      redirect_to request.referrer, alert: timeline.errors.full_messages.join(', ')
+    end
   end
 
   private

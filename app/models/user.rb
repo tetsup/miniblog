@@ -9,13 +9,13 @@ class User < ApplicationRecord
          :rememberable, :validatable
   validates :profile, length: { maximum: 200 }
   has_many :timelines, dependent: :destroy
-  has_many :followedes, class_name: 'Follow', foreign_key: :followed_user_id, dependent: :destroy
-  has_many :followings, class_name: 'Follow', foreign_key: :follower_id
-  has_many :following_users, through: :followings, source: :followed_user
+  has_many :followee_followingships, class_name: 'Follow', foreign_key: :followed_user_id, dependent: :destroy
+  has_many :follower_followingships, class_name: 'Follow', foreign_key: :follower_id
+  has_many :following_users, through: :follower_followingships, source: :followed_user
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   def followed_by?(user)
-    followedes.find_by(follower_id: user.id).present?
+    followee_followingships.find_by(follower_id: user.id).present?
   end
 end

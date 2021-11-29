@@ -7,15 +7,11 @@
     - elsif current_user == @user
       あなたの情報ページです
     - elsif @user.followed_by?(current_user)
-      = simple_form_for(@follow, url: user_follows_path(@user), method: :delete) do |f|
-        フォロー中
-        = f.hidden_field :followed_user_id
-        = f.submit 'フォロー解除', class: 'btn btn-danger'
+      フォロー中
+      = button_to 'フォロー解除', user_follows_path(@user), method: :delete, class: 'btn btn-danger'
     - else
-      = simple_form_for(@follow, url: user_follows_path(@user), method: :post) do |f|
-        未フォロー
-        = f.hidden_field :followed_user_id
-        = f.submit 'フォロー', class: 'btn btn-primary'
+      未フォロー
+      = button_to 'フォロー', user_follows_path(@user), method: :post, class: 'btn btn-primary'
   %p
     Username
     %br/
